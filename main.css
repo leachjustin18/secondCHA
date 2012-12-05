@@ -1,0 +1,101 @@
+body {
+ font-family: arial;
+ font-size: 13px;
+ color:#000;
+}
+#wrapper {
+	width: 550px;
+	height: 430px;
+
+}
+table {
+	border-collapse: collapse;
+}
+
+.dragAnswer {
+	width: 131px;
+	height: 68px;
+	cursor: pointer;
+}
+
+#a1 {background-image: url('collaboration.png');}
+#a2 {background-image: url('confidence.png');}
+#a3 {background-image: url('information.png');}
+#a4 {background-image: url('respect.png');}
+#a5 {background-image: url('family.png');}
+
+.dropAnswer {
+	width: 103px;
+	height: 46px;
+	background-image: url('drag.png');
+	
+}
+
+.dropAnswerActive {
+	background-color: #FF0;
+}
+
+.answers {
+	padding-right: 10px;
+}
+
+.questionAnswer {
+	padding-right: 20px;
+}
+
+.allQA tr {
+	height: 60px;
+}
+
+
+.correctImage {
+    background-image: url('correct.png');
+    width: 29px;
+    height: 28px;
+    position: absolute;
+    left: 135px;
+    z-index: 40;
+}
+
+.wrongImage {
+    background-image: url('incorrect.png');
+    width: 29px;
+    height: 28px;
+    position: absolute;
+    left:135px;
+    z-index: 40;
+}
+
+.fadeIn {
+	
+   display: none;
+
+}
+
+.fadeInTop {
+	border-top: 2px solid #eee;
+	border-left: 2px solid #eee;
+	border-right: 2px solid #eee;
+}
+.fadeInSide {
+	border-left: 2px solid #eee;
+	border-right: 2px solid #eee;
+}
+
+.fadeInBottom {
+	border-bottom: 2px solid #eee;
+	border-left: 2px solid #eee;
+	border-right: 2px solid #eee;
+}
+
+.visibility {
+	visibility: hidden;
+}
+
+.explanation {
+	position: absolute;
+	top: 90px;
+	width: 265px;
+}
+
+
