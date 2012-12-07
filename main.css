@@ -18,6 +18,8 @@ table {
 	cursor: pointer;
 }
 
+.instructions {font-style: italic;}
+
 #a1 {background-image: url('collaboration.png');}
 #a2 {background-image: url('confidence.png');}
 #a3 {background-image: url('information.png');}
@@ -66,36 +68,31 @@ table {
     z-index: 40;
 }
 
-.fadeIn {
-	
-   display: none;
-
-}
-
-.fadeInTop {
-	border-top: 2px solid #eee;
-	border-left: 2px solid #eee;
-	border-right: 2px solid #eee;
-}
-.fadeInSide {
-	border-left: 2px solid #eee;
-	border-right: 2px solid #eee;
-}
-
-.fadeInBottom {
-	border-bottom: 2px solid #eee;
-	border-left: 2px solid #eee;
-	border-right: 2px solid #eee;
-}
-
-.visibility {
-	visibility: hidden;
-}
-
 .explanation {
 	position: absolute;
-	top: 90px;
-	width: 265px;
+	top: 9px;
+	width: 290px;
+	height: 340px;
+	display: none;
+  padding:10px;
+	border: 2px solid #cdcdcd;
+	left:280px;
+  background-color:#efefef;
 }
 
+.principles {
+	display: none;
+	padding-top:10px;
+}
 
+.principles strong {
+  font-size:16px;
+}
+
+.exampleLabel {
+  margin-top:20px;
+  font-size:14px;
+  font-weight:bold;
+} 
+
+.visibility {visibility: hidden;}

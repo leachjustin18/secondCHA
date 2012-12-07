@@ -11,27 +11,18 @@
         <script>
     $(function() {
        var selectedAnswers = [0,0,0,0,0]
-            ,correctAnswers = [4,3,1,5,2];
     	 var $sel = {
         	answers : $('#a1, #a2, #a3, #a4, #a5'),
         	questions : $('#q1, #q2, #q3, #q4, #q5'),
           allQuestions : $('.questions'),
-          questionTop: $('.questionsTop'),
-          fadeIn: $('.fadeIn'),
           explanation: $('.explanation'),
-          topBorder: $('.topBorder'),
-          sideBorder: $('.sideBorder'),
-          bottomBorder: $('.bottomBorder'),
-          a1 : $('#a1'),
-          a2: $('#a2'),
-          a3: $('#a3'),
-          a4: $('#a4'),
-          a5: $('#a5')
+          principles : $('.principles'),
+          exampleContent: $('#exampleContent')
         }
         $sel.answers.draggable({
-          revert:"invalid",
-          stack: '.dropAnswer'
+          revert:"invalid"
         });
+           
         $sel.questions.droppable({
         	hoverClass: 'dropAnswerActive', 
           tolerance:"intersect",
@@ -54,78 +45,99 @@
             for(var a=0; a<selectedAnswers.length; a++) {
               if(selectedAnswers[a] === 0) foundNotSelected = true;
             }
-            if(!foundNotSelected) {
-              for(var a=0; a<selectedAnswers.length; a++) {
-                if(selectedAnswers[a] === correctAnswers[a]) {
-                  $('.cwImage' + a).addClass('correctImage').removeClass('wrongImage');
-                } else {
-                  $('.cwImage' + a).addClass('wrongImage').removeClass('correctImage');
-                }
-              }
-                $sel.allQuestions.addClass('visibility');
-                $sel.questionTop.hide();
-                $sel.topBorder.addClass('fadeInTop');
-                $sel.sideBorder.addClass('fadeInSide');
-                $sel.bottomBorder.addClass('fadeInBottom');
-                $sel.fadeIn.fadeIn('slow');
 
-                $sel.a1.hover(function() {
-                  $sel.explanation.html(" "+ "<strong> " + "Collaboration: " + "</strong> " + " The family knows the child and his/her strengths and needs. The medical team provides the medical knowledge. Together the family and medical team can provide the best care for the child.");
-                });
-                 $sel.a2.hover(function() {
-                  $sel.explanation.html(" "+ "<strong> " + "Confidence Building: " + "</strong> " + "  Families should be taught from the time of admission what they will need to know to care for the child at time of discharge.");
-                });
-                  $sel.a3.hover(function() {
-                  $sel.explanation.html(" "+ "<strong> " + "Information Sharing: " + "</strong> " + " The family requires complete and accurate information in order to make decisions in their child's care. The entire medical team has to be willing to give the family information in terms they can understand. The medical team also has the responsibility to determine that the family understands the information and its implications.");
-                });
-                   $sel.a4.hover(function() {
-                  $sel.explanation.html(" "+ "<strong> " + "Respect: " + "</strong> " + " Families want what is best for their child. It is the health care professional's obligation to honor the family's choices in care decisions – value the family's culture, religious beliefs and family values.");
-                });
-                    $sel.a5.hover(function() {
-                  $sel.explanation.html(" "+ "<strong> " + "Family–to–Family Support: " + "</strong> " + " Families often share support as they encounter others in public areas (cafeteria, waiting area, gift shops, etc.). Sometimes a child will have a condition, treatment or diagnosis that makes it helpful to have more formalized support.");
-                });
+            if(!foundNotSelected) {
+              $sel.questions.each(function(index) {
+                var $this = $(this);
+                if(selectedAnswers[index] === (index+1)) {
+                  $('.cwImage' + index).removeClass('wrongImage').addClass('correctImage');
+                } else {
+                  $('.cwImage' + index).removeClass('correctImage').addClass('wrongImage');
+                }
+              });
+            
+              $sel.allQuestions.addClass('visibility');
+              $sel.explanation.show();
+
+              $sel.answers.hover(function() {
+                $sel.principles.hide();
+                // determine the number
+                var selectedAnswer = $(this).attr("number");
+                // unhide the correct description
+                var answers = $("#" + selectedAnswer).show();
+                // add the original example
+                $sel.exampleContent.html($(".questions[number='" + selectedAnswer + "']").html());
+              });
+
             }
           }
         });
 });
     </script>
-
     </head>
     <body>
     	<div id="wrapper">
         <table class="allQA">
           <tbody>
             <tr>
-              
               <td class="answers"><span class="cwImage0"></span><div class="dragAnswer" id="a1" number="1"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q1" number="1"></div></td>
-              <td class="topBorder"><span class="explanation"></span><span class="fadeIn">Hover over the principles for more information.</span><span class="questionsTop">The obligation to honor family's choices in care decisions. Value culture, religious beliefs and family values.</span> </td>
-              
+              <td class="questionAnswer"><div class="dropAnswer" id="q1" number="4"></div></td>
+              <td><span class="questions" number="4">The obligation to honor family's choices in care decisions. Value culture, religious beliefs and family values.</span> </td>
             </tr>
             <tr>
               <td class="answers"><span class="cwImage1"></span><div class="dragAnswer" id="a2" number="2"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q2" number ="2"></div></td>
-              <td class="sideBorder"><span class="questions">The entire medical team is willing to give the family information in terms they understand.</span></td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q2" number ="3"></div></td>
+              <td><span class="questions" number="3">The entire medical team is willing to give the family information in terms they understand.</span></td>
             </tr>
             <tr >
               <td class="answers"><span class="cwImage2"></span><div class="dragAnswer" id="a3" number="3"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q3" number= "3"></div></td>
-              <td class="sideBorder"><span class="questions">The family and medical team work together to provide the best care for the child.</span></td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q3" number= "1"></div></td>
+              <td class="sideBorder"><span class="questions" number="1">The family and medical team work together to provide the best care for the child.</span></td>
             </tr>
             <tr >
               <td class="answers"><span class="cwImage3"></span><div class="dragAnswer" id="a4" number="4"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q4" number="4"></div></td>
-              <td class="sideBorder"><span class="questions">Families share support as they encounter others in public areas of the hospital. Support groups and community resources can provide the family with needed information to help them feel secure.</span></td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q4" number="5"></div></td>
+              <td><span class="questions" number="5">Families share support as they encounter others in public areas of the hospital. Support groups and community resources can provide the family with needed information to help them feel secure.</span></td>
             </tr>
             <tr>
               <td class="answers"><span class="cwImage4"></span><div class="dragAnswer" id="a5" number="5"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id = "q5" number="5"></div></td>
-              <td class="bottomBorder"><span class="questions">Teaches families from the time of admission what they will need to know to care for the child after discharge.</span> </td>
+              <td class="questionAnswer"><div class="dropAnswer" id = "q5" number="2"></div></td>
+              <td><span class="questions" number="2">Teaches families from the time of admission what they will need to know to care for the child after discharge.</span> </td>
             </tr>
           </tbody>
         </table>
-
     	<!--end of wrapper-->
     	</div>
+      <!--Explanations to be shown after you answers all questions-->
+      <div class="explanation">
+        <div class="instructions">Hover over the principles for more information.</div>
+
+        <div id="1" class="principles">
+          <strong>Collaboration</strong><br/>
+          The family knows the child and his/her strengths and needs. The medical team provides the medical knowledge. Together the family and medical team can provide the best care for the child. 
+        </div>
+
+        <div id="2" class="principles">
+          <strong>Confidence Buildilng</strong><br/>
+          Families should be taught from the time of admission what they will need to know to care for the child at time of discharge.
+        </div>
+
+        <div id="3" class="principles">
+          <strong>Information Sharing</strong><br/>The family requires complete and accurate information in order to make decisions in their child's care. The entire medical team has to be willing to give the family information in terms they can understand. The medical team also has the responsibility to determine that the family understands the information and its implications.
+        </div>
+
+        <div id="4" class="principles">
+          <strong>Respect</strong><br/>Families want what is best for their child. It is the health care professional's obligation to honor the family's choices in care decisions – value the family's culture, religious beliefs and family values.
+        </div>
+
+         <div id="5" class="principles">
+          <strong>Family–to–Family Support</strong><br/>Families often share support as they encounter others in public areas (cafeteria, waiting area, gift shops, etc.). Sometimes a child will have a condition, treatment or diagnosis that makes it helpful to have more formalized support.
+        </div>
+        
+        <div class="example">
+          <div class="exampleLabel">Example</div>
+          <div id="exampleContent"></div>
+        </div>
+      </div>
     </body>
 </html>
