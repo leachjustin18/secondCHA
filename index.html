@@ -6,73 +6,68 @@
         <title>Untitled</title>
         <script src="media/jquery-1.8.min.js" type="text/javascript" charset="utf-8" ></script>
         <script src="media/jquery-ui.custom.min.js" type="text/javascript" charset="utf-8" ></script>
-        <link rel="stylesheet" type="text/css" href="media/main.css"/>
+
+         <link rel="stylesheet" type="text/css" href="media/main.css"/>
         <link href='http://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
         <script>
     $(function() {
-       var selectedAnswers = [0,0,0,0,0]
-    	 var $sel = {
-        	answers : $('#a1, #a2, #a3, #a4, #a5'),
-        	questions : $('#q1, #q2, #q3, #q4, #q5'),
-          allQuestions : $('.questions'),
-          explanation: $('.explanation'),
-          principles : $('.principles'),
-          exampleContent: $('#exampleContent')
-        }
-        $sel.answers.draggable({
-          revert:"invalid"
-        });
-           
-        $sel.questions.droppable({
-        	hoverClass: 'dropAnswerActive', 
-          tolerance:"intersect",
-          accept:$sel.answers,
-          drop: function( event, ui ) {
-            $this = $(this);
-            ui.helper.draggable('disable');
-            selectedAnswer = parseInt(ui.helper.attr('number'));
-            answerPosition = parseInt($this.attr('number')) -1;
-            
-            // insert positioning
-            ui.helper.offset({
-              top:$this.offset().top - 6,
-              left:$this.offset().left - 10
-            });
-
-            $this.droppable('option', 'accept', null);
-            selectedAnswers[answerPosition] = selectedAnswer;
-            foundNotSelected = false;
-            for(var a=0; a<selectedAnswers.length; a++) {
-              if(selectedAnswers[a] === 0) foundNotSelected = true;
-            }
-
-            if(!foundNotSelected) {
-              $sel.questions.each(function(index) {
-                var $this = $(this);
-                if(selectedAnswers[index] === (index+1)) {
-                  $('.cwImage' + index).removeClass('wrongImage').addClass('correctImage');
-                } else {
-                  $('.cwImage' + index).removeClass('correctImage').addClass('wrongImage');
-                }
-              });
-            
-              $sel.allQuestions.addClass('visibility');
-              $sel.explanation.show();
-
-              $sel.answers.hover(function() {
-                $sel.principles.hide();
-                // determine the number
-                var selectedAnswer = $(this).attr("number");
-                // unhide the correct description
-                var answers = $("#" + selectedAnswer).show();
-                // add the original example
-                $sel.exampleContent.html($(".questions[number='" + selectedAnswer + "']").html());
-              });
-
-            }
-          }
-        });
-});
+   var selectedAnswers = [0, 0, 0, 0, 0],
+     correctAnswers = [4, 3, 1, 5, 2];
+   var $sel = {
+     answers: $('#a1, #a2, #a3, #a4, #a5'),
+     questions: $('#q1, #q2, #q3, #q4, #q5'),
+     allQuestions: $('.questions'),
+     explanation: $('.explanation'),
+     principles: $('.principles'),
+     exampleContent: $('#exampleContent')
+   }
+   $sel.answers.draggable({
+     revert: "invalid"
+   });
+   $sel.questions.droppable({
+     hoverClass: 'dropAnswerActive',
+     tolerance: "intersect",
+     accept: $sel.answers,
+     drop: function(event, ui) {
+       $this = $(this);
+       ui.helper.draggable('disable');
+       selectedAnswer = parseInt(ui.helper.attr('number'));
+       answerPosition = parseInt($this.attr('number')) - 1;
+       // insert positioning
+       ui.helper.offset({
+         top: $this.offset().top - 6,
+         left: $this.offset().left - 10
+       });
+       $this.droppable('option', 'accept', null);
+       selectedAnswers[answerPosition] = selectedAnswer;
+       foundNotSelected = false;
+       for(var a = 0; a < selectedAnswers.length; a++) {
+         if(selectedAnswers[a] === 0) foundNotSelected = true;
+       }
+       if(!foundNotSelected) {
+         var $this = $(this);
+         for(var a = 0; a < selectedAnswers.length; a++) {
+           if(selectedAnswers[a] === correctAnswers[a]) {
+             $('.cwImage' + a).removeClass('wrongImage').addClass('correctImage');
+           } else {
+             $('.cwImage' + a).removeClass('correctImage').addClass('wrongImage');
+           }
+         }
+         $sel.allQuestions.addClass('visibility');
+         $sel.explanation.show();
+         $sel.answers.hover(function() {
+           $sel.principles.hide();
+           // determine the number
+           var selectedAnswer = $(this).attr("number");
+           // unhide the correct description
+           $("#" + selectedAnswer).show();
+           // add the original example
+           $sel.exampleContent.html($(".questions[label='" + selectedAnswer + "']").html());
+         });
+       }
+     }
+   });
+ });
     </script>
     </head>
     <body>
@@ -81,28 +76,28 @@
           <tbody>
             <tr>
               <td class="answers"><span class="cwImage0"></span><div class="dragAnswer" id="a1" number="1"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q1" number="4"></div></td>
-              <td><span class="questions" number="4">The obligation to honor family's choices in care decisions. Value culture, religious beliefs and family values.</span> </td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q1" number="1"></div></td>
+              <td><span class="questions" number="1" label="4">The obligation to honor family's choices in care decisions. Value culture, religious beliefs and family values.</span> </td>
             </tr>
             <tr>
               <td class="answers"><span class="cwImage1"></span><div class="dragAnswer" id="a2" number="2"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q2" number ="3"></div></td>
-              <td><span class="questions" number="3">The entire medical team is willing to give the family information in terms they understand.</span></td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q2" number ="2"></div></td>
+              <td><span class="questions" number="2" label="3">The entire medical team is willing to give the family information in terms they understand.</span></td>
             </tr>
             <tr >
               <td class="answers"><span class="cwImage2"></span><div class="dragAnswer" id="a3" number="3"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q3" number= "1"></div></td>
-              <td class="sideBorder"><span class="questions" number="1">The family and medical team work together to provide the best care for the child.</span></td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q3" number= "3"></div></td>
+              <td><span class="questions" number="3" label="1">The family and medical team work together to provide the best care for the child.</span></td>
             </tr>
             <tr >
               <td class="answers"><span class="cwImage3"></span><div class="dragAnswer" id="a4" number="4"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id="q4" number="5"></div></td>
-              <td><span class="questions" number="5">Families share support as they encounter others in public areas of the hospital. Support groups and community resources can provide the family with needed information to help them feel secure.</span></td>
+              <td class="questionAnswer"><div class="dropAnswer" id="q4" number="4"></div></td>
+              <td><span class="questions" label="5" number="4">Families share support as they encounter others in public areas of the hospital. Support groups and community resources can provide the family with needed information to help them feel secure.</span></td>
             </tr>
             <tr>
               <td class="answers"><span class="cwImage4"></span><div class="dragAnswer" id="a5" number="5"></div></td>
-              <td class="questionAnswer"><div class="dropAnswer" id = "q5" number="2"></div></td>
-              <td><span class="questions" number="2">Teaches families from the time of admission what they will need to know to care for the child after discharge.</span> </td>
+              <td class="questionAnswer"><div class="dropAnswer" id = "q5" number="5"></div></td>
+              <td><span class="questions" label="2" number="5">Teaches families from the time of admission what they will need to know to care for the child after discharge.</span> </td>
             </tr>
           </tbody>
         </table>
